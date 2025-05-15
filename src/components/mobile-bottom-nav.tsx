@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import NavMenu from "@/lib/nav-menu"
-import { signOutAction } from "@/api/actions"
+import { signOutAction } from "@/lib/actions"
 import { User } from "@/lib/definitions"
 import clsx from "clsx"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
@@ -15,7 +15,7 @@ export function MobileBottomNav({ user, tab }: { user:User, tab?:string }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const activeTab = searchParams.get("tab") || "nearyou"
+  const activeTab = searchParams.get("tab") || "a"
   const activeMenu = NavMenu.find(section =>
     section.content.some(menu => menu.value === activeTab)
   ) || NavMenu[0];

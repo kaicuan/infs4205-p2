@@ -1,6 +1,5 @@
-import Map from "@/components/map"
 import type { Location, User } from "@/lib/definitions"
-import { getFriendList, getLastPosition, getNearbySpot, getSpotRecommendation } from "@/api/data"
+import { getFriendList, getLastPosition, getPopularSpots, getRecommendedSpots, getSpotByProximity } from "@/lib/data"
 import { AppSidebar } from "@/components/app-sidebar"
 import { MobileBottomNav } from "@/components/mobile-bottom-nav"
 import { MobileDrawer } from "@/components/mobile-drawer"
@@ -9,22 +8,24 @@ import { auth } from "@/auth"
 import { TabSocial } from "@/components/tab-social"
 import { Suspense } from "react"
 import { TabSocialSkeleton } from "@/components/tab-social-skeleton"
-import TabNearYou from "@/components/tab-nearyou"
+import TabA from "@/components/tab-a"
+import TabB from "@/components/tab-b"
 import MapWrapper from "@/components/map-wrapper"
 import NavMenu from "@/lib/nav-menu"
+import TabC from "@/components/tab-c"
 
 const tabComponentMap = {
-  nearyou: {
-    Component: TabNearYou,
-    fetcher: (bb?: string) => getNearbySpot(bb),
+  a: {
+    Component: TabA,
+    fetcher: (c?:string, bb?: string, k?: string, n?: string, start_date?: string, end_date?: string, friend_only?: string) => getPopularSpots(bb, k, start_date, end_date, friend_only),
   },
-  foryou: {
-    Component: TabNearYou,
-    fetcher: (bb?: string) => getNearbySpot(bb),
+  b: {
+    Component: TabB,
+    fetcher: (c?:string, bb?: string, k?: string, n?: string, start_date?: string, end_date?: string, friend_only?: string) => getSpotByProximity(c, k, n, start_date, end_date, friend_only)
   },
-  advanced: {
-    Component: TabNearYou,
-    fetcher: (bb?: string) => getNearbySpot(bb),
+  c: {
+    Component: TabC,
+    fetcher: (c?:string, bb?: string, k?: string, n?: string, start_date?: string, end_date?: string, friend_only?: string) => getRecommendedSpots(k, start_date, end_date, friend_only),
   },
   friend: {
     Component: TabSocial,
@@ -41,31 +42,39 @@ export default async function Home(props: {
     bb?: string
     tab?: string
     explore?: string
+    k?: string
+    n?: string
+    start_date?: string
+    end_date?: string
+    friend_only?: string
   }
 }) {
   const session = await auth()
   const user = session?.user as User
 
   const searchParams = await props.searchParams || {}
+  let { c, z, bb, tab, explore, k, n, start_date, end_date, friend_only } = searchParams;
 
-  const tab = searchParams.tab || "nearyou"
+  tab = tab || "a"
   const menu = NavMenu.find(section =>
     section.content.some(menu => menu.value === tab)
   ) || NavMenu[0];
-  const explore = searchParams.explore || "nearyou"
+  explore = explore || "a"
 
-  const TabConfig = tabComponentMap[tab as TabKey] || tabComponentMap.nearyou
+  const TabConfig = tabComponentMap[tab as TabKey] || tabComponentMap.a
 
   // Determine promises
   let mapPromise: Promise<any> | undefined
   let contentPromise: Promise<any> | undefined
   
+
+  
   if (menu.value === "explore") {
-    contentPromise = TabConfig.fetcher(searchParams.bb)
+    contentPromise = TabConfig.fetcher(c, bb, k, n, start_date, end_date, friend_only)
     mapPromise = contentPromise
   } else {
     contentPromise = TabConfig.fetcher()
-    mapPromise = tabComponentMap[explore as TabKey].fetcher(searchParams.bb)
+    mapPromise = tabComponentMap[explore as TabKey].fetcher(c, bb, k, n, start_date, end_date, friend_only)
   }
 
   const content = (
@@ -76,7 +85,7 @@ export default async function Home(props: {
 
   // Determine map center
   let center: [number, number] | undefined
-  if (!searchParams.c) {
+  if (!c) {
     const lastPos = await getLastPosition()
     if (lastPos[0]) {
       center = lastPos[0].geom.coordinates

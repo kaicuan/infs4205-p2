@@ -26,6 +26,10 @@ CREATE TABLE edges (
     CHECK (user_id <> friend_id)
 );
 
+CREATE INDEX idx_locations_geom ON locations USING GIST (geom);
+CREATE INDEX idx_checkins_user_checkin_time ON checkins (user_id, checkin_time);
+CREATE INDEX idx_checkins_location_checkin_time ON checkins (location_id, checkin_time);
+
 -- =================================
 -- Insert data from the dataset
 -- =================================

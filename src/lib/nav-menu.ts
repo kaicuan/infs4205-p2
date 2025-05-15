@@ -21,16 +21,16 @@ const NavMenu: NavMenuItem[] = [
     icon: Compass,
     content: [
       {
-        title: "Near You",
-        value: "nearyou",
+        title: "Top Spots",
+        value: "a",
       },
       {
-        title: "For You",
-        value: "foryou",
+        title: "Nearby Favorites",
+        value: "b",
       },
       {
-        title: "Advanced",
-        value: "advanced"
+        title: "For you",
+        value: "c"
       }
     ]
   },

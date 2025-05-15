@@ -5,7 +5,7 @@
   import { Button } from '@/components/ui/button';
   import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
   import { useActionState } from 'react';
-  import { authenticate } from '@/api/actions';
+  import { authenticate } from '@/lib/actions';
   import { useSearchParams } from 'next/navigation';
 
   export default function LoginForm() {

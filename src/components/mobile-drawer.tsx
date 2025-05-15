@@ -31,9 +31,11 @@ export function MobileDrawer({ tab, children }: MobileDrawerProps) {
         >
           <DrawerTitle className="hidden">Explore</DrawerTitle>
           <ScrollArea className="h-[78vh] pb-14 max-w-[400px] mx-auto w-full">
-            <AppTab tab={tab}>
-              {children}
-            </AppTab>
+            <div className="mb-10">
+              <AppTab tab={tab}>
+                {children}
+              </AppTab>
+            </div>
           </ScrollArea>
       </DrawerContent>
     </Drawer>

@@ -13,7 +13,7 @@ export function AppSidebarMenu() {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const activeTab = searchParams.get("tab") || "nearyou"
+  const activeTab = searchParams.get("tab") || "a"
   const activeMenu = getMenuFromTab(activeTab)
   const explore = searchParams.get("explore")
   

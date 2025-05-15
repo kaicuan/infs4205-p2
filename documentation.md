@@ -1,4 +1,3 @@
-
 # Web Application Project Documentation
 
 ## 1. Project Overview

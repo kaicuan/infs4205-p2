@@ -1,6 +1,6 @@
 import { Command } from "lucide-react"
 import NavMenu from "@/lib/nav-menu"
-import { NavUser } from "@/components/nav-user"
+import { User } from "@/lib/definitions"
 import {
   Sidebar,
   SidebarContent,
@@ -13,9 +13,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { NavUser } from "@/components/nav-user"
 import { AppSidebarMenu } from "@/components/app-sidebar-menu"
 import { AppTab } from "@/components/app-tab"
-import { User } from "@/lib/definitions"
 
 interface AppSidebarProps {
   tab: string,

@@ -1,5 +1,5 @@
 import { TabSocial } from "@/components/tab-social"
-import { getFriendList } from "@/api/data"
+import { getFriendList } from "@/lib/data"
 import { Suspense } from "react"
 import { TabSocialSkeleton } from "@/components/tab-social-skeleton"
 
