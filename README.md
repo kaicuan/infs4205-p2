@@ -36,7 +36,7 @@ Recommend locations based on check-in patterns of similar users (friends or shar
 ### Environment Setup
 Install depedencies
 ```bash
-npm install
+npm install --force
 ```
 Setup environment variable, fill in `.env`. Below is an example, change the field to match your database credential.
 ```
