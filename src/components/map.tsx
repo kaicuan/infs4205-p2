@@ -50,7 +50,7 @@ export default function Map({
     if (!searchParams.get('c')) {
       handleUpdateURL();
     }
-  }, []);
+  });
 
   // Debounced URL update handler
   const handleUpdateURL = useDebouncedCallback(() => {

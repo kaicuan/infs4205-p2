@@ -11,7 +11,7 @@ import { User } from "@/lib/definitions"
 import clsx from "clsx"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
 
-export function MobileBottomNav({ user, tab }: { user:User, tab?:string }) {
+export function MobileBottomNav({ user }: { user:User }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()

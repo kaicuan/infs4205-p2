@@ -1,4 +1,4 @@
-import type { Location, User } from "@/lib/definitions"
+import type { User } from "@/lib/definitions"
 import { getFriendList, getLastPosition, getPopularSpots, getRecommendedSpots, getSpotByProximity } from "@/lib/data"
 import { AppSidebar } from "@/components/app-sidebar"
 import { MobileBottomNav } from "@/components/mobile-bottom-nav"
@@ -36,7 +36,7 @@ const tabComponentMap = {
 type TabKey = keyof typeof tabComponentMap
 
 export default async function Home(props: {
-  searchParams?: {
+  searchParams?: Promise<{
     c?: string
     z?: number
     bb?: string
@@ -47,13 +47,14 @@ export default async function Home(props: {
     start_date?: string
     end_date?: string
     friend_only?: string
-  }
+  }>
 }) {
   const session = await auth()
   const user = session?.user as User
 
   const searchParams = await props.searchParams || {}
-  let { c, z, bb, tab, explore, k, n, start_date, end_date, friend_only } = searchParams;
+  let { tab, explore } = searchParams;
+  const { c, bb, k, n, start_date, end_date, friend_only } = searchParams;
 
   tab = tab || "a"
   const menu = NavMenu.find(section =>
@@ -102,8 +103,7 @@ export default async function Home(props: {
           {content}
         </AppSidebar>
         
-        <MobileBottomNav 
-          tab={tab}
+        <MobileBottomNav
           user={user} 
         />
         

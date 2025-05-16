@@ -54,11 +54,13 @@ export default function TabAInput() {
     const newParams = new URLSearchParams(searchParams.toString())
 
     // Update params
+    /* eslint-disable @typescript-eslint/no-unused-expressions */
     dateRange.from ? newParams.set('start_date', dateRange.from) : newParams.delete('start_date')
     dateRange.to ? newParams.set('end_date', dateRange.to) : newParams.delete('end_date')
     friendOnly ? newParams.set('friend_only', 'true') : newParams.delete('friend_only')
     nValue !== 50 ? newParams.set('n', nValue.toString()) : newParams.delete('n')
     kValue !== 30 ? newParams.set('k', kValue.toString()) : newParams.delete('k')
+    /* eslint-enable @typescript-eslint/no-unused-expressions */
 
     router.replace(`?${newParams.toString()}`)
     setHasChanges(false)

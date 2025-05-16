@@ -1,4 +1,3 @@
-import { MapPin, UserRoundCheck } from "lucide-react";
 import type { Location } from "@/lib/definitions";
 import TabBContent from "@/components/tab-b-content";
 

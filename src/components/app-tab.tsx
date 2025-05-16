@@ -4,7 +4,6 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import NavMenu from "@/lib/nav-menu"
-import { TabSocialSkeleton } from "./tab-social-skeleton"
 
 export function AppTab({
   tab,

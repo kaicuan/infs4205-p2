@@ -1,12 +1,15 @@
-import NextAuth from 'next-auth';
+import NextAuth, { User } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from '@/auth.config';
 import { z } from 'zod';
-import type { User } from '@/lib/definitions';
 import sql from '@/lib/db';
 import { DefaultSession } from 'next-auth';
  
 declare module "next-auth" {
+  interface User {
+    user_id: number;
+    username: string;
+  }
   interface Session {
     user: User & DefaultSession["user"]
   }

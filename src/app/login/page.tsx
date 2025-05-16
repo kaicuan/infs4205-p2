@@ -1,4 +1,3 @@
-import Logo from '@/components/ui/logo';
 import LoginForm from '@/components/login-form';
 import { Suspense } from 'react';
  
