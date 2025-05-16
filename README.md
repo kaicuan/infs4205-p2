@@ -53,7 +53,7 @@ AUTH_TRUST_HOST=true
 ```
 
 ### Database Configuration
-The following configuration is for Windows... Different OS may have different ways, but the point is to create a database, and run the file `setup.sql` inside the new database
+The following configuration is for Windows... Different OS may have different ways, but the point is to create a database, and run the file `setup.sql` inside the new database, and make sure that `setup.sql` has access to `loc-gowalla_edges.txt.gz` and `loc-gowalla_totalCheckins.txt.gz`
 ### 1. Download the dataset
 Download the following files from [SNAP](https://snap.stanford.edu/data/loc-Gowalla.html):
 - `loc-gowalla_edges.txt.gz`
@@ -229,6 +229,7 @@ LIMIT ${K!};
 ## 6. How to Run the Application
 Run via:
 ```bash
+npm run build
 npm run start
 ```
 The web app should be running on: [https:\\localhost:3000](http://localhost:3000/). The web app will ask to login, and you can use any username from `user0` to `user196590` (E.g `user2025`).
